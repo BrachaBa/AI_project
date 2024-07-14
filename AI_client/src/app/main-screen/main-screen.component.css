@@ -1,0 +1,25 @@
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  button {
+    margin-top: 20px;
+  }
+  
+  .blessing {
+    margin-top: 20px;
+  }
+  

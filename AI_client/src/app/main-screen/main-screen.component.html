@@ -1,0 +1,137 @@
+
+<button class="g-signin2" (click)="signInWithGoogle()">התחבר עם Google</button>
+
+<div class="language-selector">
+  <button (click)="setLanguage('hebrew')">עברית</button>
+  <button (click)="setLanguage('english')">English</button>
+</div>
+
+<style>
+  .page-background {
+    background-color: #f8f9fa;
+    /* צבע רקע */
+    /* background-image: url('assets/background.jpg'); תמונת רקע */
+    background-size: cover;
+    /* שמירה על יחסי הגובה והרוחב */
+    background-position: center;
+    /* מיקום התמונה במרכז */
+    padding: 20px;
+    /* מרווחים מסביב */
+    border-radius: 10px;
+    /* פינות מעוגלות */
+  }
+
+  .form-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    /* רקע חלק */
+    padding: 30px;
+    /* מרווחים פנימיים */
+    border-radius: 10px;
+    /* פינות מעוגלות */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    /* צללית */
+  }
+</style>
+
+<div class="container mt-5 page-background">
+  <div class="form-container">
+    <div *ngIf="selectedLanguage == 'hebrew'">
+      <h1>מחולל ברכות לאירועים שונים</h1>
+      <form (ngSubmit)="generateBlessing()" class="mt-4">
+        <div class="form-group">
+          <label for="event">בחירת אירוע:</label>
+          <select id="event" [(ngModel)]="event" name="event" class="form-control">
+            <option value="birthday">יום הולדת</option>
+            <option value="wedding">חתונה</option>
+            <option value="anniversary">יום נישואין</option>
+            <option value="other">אחר</option>
+          </select>
+          <input *ngIf="event === 'other'" type="text" class="form-control mt-2" [(ngModel)]="customEvent"
+            name="customEvent" placeholder="הזן את האירוע המבוקש">
+
+        </div>
+
+        <div *ngIf="event === 'birthday'" class="form-group">
+          <label for="age">גיל:</label>
+          <input type="number" id="age" [(ngModel)]="age" name="age" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="type">סוג הברכה:</label>
+          <select id="type" [(ngModel)]="type" name="type" class="form-control">
+            <option value="short">קצרה</option>
+            <option value="long">ארוכה</option>
+            <option value="song">שיר</option>
+            <option value="other">אחר</option>
+          </select>
+          <input *ngIf="type === 'other'" type="text" class="form-control mt-2" [(ngModel)]="customType"
+            name="customType" placeholder="הזן את סוג הברכה המבוקש">
+
+        </div>
+
+        <div class="form-group">
+          <label for="mood">אווירה:</label>
+          <select id="mood" [(ngModel)]="mood" name="mood" class="form-control">
+            <option value="happy">שמחה</option>
+            <option value="funny">מצחיקה</option>
+            <option value="serious">רצינית</option>
+            <option value="other">אחר</option>
+          </select>
+          <input *ngIf="mood === 'other'" type="text" class="form-control mt-2" [(ngModel)]="customMood"
+            name="customMood" placeholder="הזן את האווירה המבוקשת">
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-3">כתוב לי ברכה</button>
+      </form>
+
+      <div *ngIf="blessing" class="mt-4">
+        <h2>הברכה שלך:</h2>
+        <p>{{ blessing }}</p>
+        <button (click)="requestAnother()" class="btn btn-secondary">אני רוצה משהו שונה</button>
+      </div>
+    </div>
+
+    <div *ngIf="selectedLanguage == 'english'">
+      <h1>Greetings Generator for Different Events</h1>
+      <label for="event">Choose Event:</label>
+      <select id="event" [(ngModel)]="event" name="event" class="form-control">
+        <option value="birthday">Birthday</option>
+        <option value="wedding">Wedding</option>
+        <option value="anniversary">Anniversary</option>
+        <option value="other">Other</option>
+      </select>
+      <input *ngIf="event === 'other'" type="text" class="form-control mt-2" [(ngModel)]="customEvent" name="customEvent" placeholder="Enter the desired event">
+      
+      <div *ngIf="event === 'birthday'" class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" [(ngModel)]="age" name="age" class="form-control">
+      </div>
+    
+      <label for="type">Type of Greeting:</label>
+      <select id="type" [(ngModel)]="type" name="type" class="form-control">
+        <option value="short">Short</option>
+        <option value="long">Long</option>
+        <option value="song">Song</option>
+        <option value="other">Other</option>
+      </select>
+      <input *ngIf="type === 'other'" type="text" class="form-control mt-2" [(ngModel)]="customType" name="customType" placeholder="Enter the desired type of greeting">
+    
+      <label for="mood">Mood:</label>
+      <select id="mood" [(ngModel)]="mood" name="mood" class="form-control">
+        <option value="happy">Happy</option>
+        <option value="funny">Funny</option>
+        <option value="serious">Serious</option>
+        <option value="other">Other</option>
+      </select>
+      <input *ngIf="mood === 'other'" type="text" class="form-control mt-2" [(ngModel)]="customMood" name="customMood" placeholder="Enter the desired mood">
+    
+      <button type="submit" class="btn btn-primary mt-3">Generate Greeting</button>
+    
+      <div *ngIf="blessing" class="mt-4">
+        <h2>Your Greeting:</h2>
+        <p>{{ blessing }}</p>
+        <button (click)="requestAnother()" class="btn btn-secondary">I want something else</button>
+      </div>
+    </div>
+  </div>
+</div>
